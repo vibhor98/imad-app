@@ -42,6 +42,6 @@ button.onclick = function() {
       //else do nothing
   }; 
   //make a request to the counter endpoint
-  request.open('GET', 'http://agarwalvibhir84.imad.hasura-app.io/counter', true);
+  request.open('GET', 'http://agarwalvibhor84.imad.hasura-app.io/counter', true);
   request.send(null);
 };
