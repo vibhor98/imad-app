@@ -1,7 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-const pool = require('pg');
+const Pool = require('pg');
 
 var config = {
     user: 'agarwalvibhor84',
@@ -125,7 +125,7 @@ app.get('/articles/:articleName', function(req, res) {
     // articleName == article-one
     //articles[articleName] == {} object for the articleOne
     
-    pool.query("SELECT * FROM article WHERE title = " + req.params.articleName, function(err, res) {
+    pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function(err, res) {
         if(err) {
             res.status(500).send(err.toString());
         }  else {
