@@ -1,7 +1,7 @@
 var express = require('express');
 var morgan = require('morgan');
 var path = require('path');
-const Pool = require('pg');
+//const Pool = require('pg');
 
 var config = {
     user: 'agarwalvibhor84',
@@ -94,8 +94,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 
-var pool = new Pool(config);
-app.get('/test-db', function(req, res) {
+//var pool = new Pool(config);
+/*app.get('/test-db', function(req, res) {
    //make a select request
    //return a response with the results
    pool.query('SELECT * FROM tets', function(err, result) {
@@ -105,7 +105,7 @@ app.get('/test-db', function(req, res) {
             res.send(JSON.stringify(result));
         }
    });
-});
+});*/
 
 var counter = 0;
 app.get('/counter', function(req, res) {
