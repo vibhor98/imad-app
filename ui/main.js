@@ -23,7 +23,7 @@ img.onclick = function() {
 
 //Counter code
 
-var button = document.getElementById('counter');
+/*var button = document.getElementById('counter');
 button.onclick = function() {
   
   //create a request obj
@@ -44,9 +44,9 @@ button.onclick = function() {
   //make a request to the counter endpoint
   request.open('GET', 'http://agarwalvibhor84.imad.hasura-app.io/counter', true);
   request.send(null);
-};
+};*/
 
-//Submit name
+//Submit username/password to login
 var submit = document.getElementById('submit-btn');
 submit.onclick = function() {
     
@@ -58,22 +58,23 @@ submit.onclick = function() {
       if(request.readyState === XMLHttpRequest.DONE) {
           //take some action
           if(request.status === 200) {
-              var names = request.responseText;
-              names = JSON.parse(names);
-              var list = '';
-              for(var i=0; i<names.length; i++) {
-                    list += '<li>' + names[i] + '</li>';
-              }
-              var ul = document.getElementById('namelist');
-              ul.innerHTML = list;
+              console.log('user logged in!');
+              alert('Logged in successfully!!!');
+          } else if(request.status === 403) {
+              alert('Invalid username/password');
+          }  else if(request.status === 5000) {
+              alert('Something went wrong on the server');
           }
       }
   };
   //make a request to the server and send the name
-  var nameInput = document.getElementById('name');
-  var name = nameInput.value;
-  request.open('GET', 'http://agarwalvibhor84.imad.hasura-app.io/submit-name?name=' + name, true);
-  request.send(null);
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('password').value;
+  console.log(username);
+  console.log(password);
+  request.open('POST', 'http://agarwalvibhor84.imad.hasura-app.io/login', true);
+  request.setHeader('Content-Type', 'application/json');
+  request.send(JSON.stringify({username: username, password: password}));
   //capture a list of names and render it as a list
 };
 
