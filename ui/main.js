@@ -75,6 +75,7 @@ submit.onclick = function() {
   request.open('POST', 'http://agarwalvibhor84.imad.hasura-app.io/login', true);
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username: username, password: password}));
+  submit.value = 'Logging...'
   //capture a list of names and render it as a list
 };
 
@@ -107,6 +108,7 @@ register.onclick = function() {
   request.open('POST', '/create-user', true);
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username: username, password: password}));
+  register.value = 'Registering...';
   //capture a list of names and render it as a list
 };
 
