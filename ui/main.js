@@ -96,7 +96,7 @@ register.onclick = function() {
               alert('Registered successfully!!!');
               register.value = 'Registered';
           } else {
-              alert('Could not register!');
+              alert('Could not register! Username already exists.');
               register.value = 'Register';
           }  
       }
