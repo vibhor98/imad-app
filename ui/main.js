@@ -60,13 +60,13 @@ submit.onclick = function() {
           if(request.status === 200) {
               console.log('user logged in!');
               alert('Logged in successfully!!!');
-              loadArticles();
           } else if(request.status === 403) {
               alert('Invalid username/password');
           }  else if(request.status === 5000) {
               alert('Something went wrong on the server');
           }
           LoggedIn();
+          loadArticles();
       }
   };
   //make a request to the server and send the name
