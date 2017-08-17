@@ -130,12 +130,12 @@ app.get('/check-login', function(req, res) {
             }
         });
     }   else
-            res.send('You are not logged in!');
+            res.status(400).send('You are not logged in!');
 });
 
 app.get('/logout', function(req, res) {
     delete req.session.auth;
-    res.send('Logged out!');
+    res.send('<h3>Logged out!</h3><br/><br/><a href="/">Back to Home</a>');
 });
 
 var pool = new Pool(config);
