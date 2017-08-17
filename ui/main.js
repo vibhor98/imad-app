@@ -113,7 +113,28 @@ register.onclick = function() {
   //capture a list of names and render it as a list
 };
 
+function userLoggedIn(username) {
+    var loginArea = document.getElementById('login-area');
+    loginArea.innerHTML = ` 
+        <h3>Hi <i>${username}</i> </h3>
+        <a href="/logout">Logout</a> `;
+}
 
+function LoggedIn() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if(request.readyState === XMLHttpRequest.DONE) {
+            if(request.status === 200) {
+                userLoggedIn(this.responseText);
+            } else {
+                alert('Error in Logging Up!!');
+            }
+        }
+    };
+    request.open('GET', '/create-user', true);
+    request.send(null);
+} 
+    
 
 
 
