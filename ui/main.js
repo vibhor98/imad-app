@@ -135,7 +135,30 @@ function LoggedIn() {
     request.send(null);
 } 
     
+function loadArticles() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if(request.readyState === XMLHttpRequest.DONE) {
+            var articles = document.getElementById('articles');
+            if(request.status === 200) {
+                var articleData = JSON.parse(this.responseText);
+                var content = '<ul>'
+                for(var i=0; i<articleData.length; i++) {
+                    content += `<li>
+                    <a href="/articles/${articleData[i].title}">${articleData[i].heading}</a>
+                    (${articleData[i].date.split('T')[0]})</li> `;
+                }
+                content += '</ul>';
+                articles.innerHTML = content;
+            }  else {
+                articles.innerHTML('Opps! Can not load all the articles.')
+        }
+    }
+    request.get('GET', '/get-articles', true);
+    request.send(null);
+}
 
+loadArticles();
 
 
 
