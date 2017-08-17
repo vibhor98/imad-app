@@ -121,10 +121,16 @@ app.post('/login', function(req, res) {
 });
 
 app.get('/check-login', function(req, res) {
-    if(req.session && req.session.auth && req.session.auth.userId)
-        res.send("You're logged in: " + req.session.auth.userId.toString());
-    else
-        res.send('You are not logged in!');
+    if(req.session && req.session.auth && req.session.auth.userId) {
+        pool.query('SELECT * FROM "user" WHERE id=$1', [req.session.auth.userId], function(err, result) {
+            if(err) {
+                res.status(500).send(err.toString());
+            }  else {
+                res.send(result.rows[0].username)
+            }
+        });
+    }   else
+            res.send('You are not logged in!');
 });
 
 app.get('/logout', function(req, res) {
