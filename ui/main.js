@@ -79,8 +79,8 @@ submit.onclick = function() {
 };
 
 //Submit username/password to register
-var submit = document.getElementById('register');
-submit.onclick = function() {
+var register = document.getElementById('register');
+register.onclick = function() {
     
     //create a request obj
   var request = new XMLHttpRequest();
@@ -92,11 +92,11 @@ submit.onclick = function() {
           if(request.status === 200) {
               console.log('user registered successfully!');
               alert('Registered successfully!!!');
-          } else if(request.status === 403) {
-              alert('Invalid username/password');
-          }  else if(request.status === 5000) {
-              alert('Something went wrong on the server');
-          }
+              register.value = 'Registered';
+          } else {
+              alert('Could not register!');
+              register.value = 'Register';
+          }  
       }
   };
   //make a request to the server and send the name
@@ -104,7 +104,7 @@ submit.onclick = function() {
   var password = document.getElementById('password').value;
   console.log(username);
   console.log(password);
-  request.open('POST', 'http://agarwalvibhor84.imad.hasura-app.io/create-user', true);
+  request.open('POST', '/create-user', true);
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username: username, password: password}));
   //capture a list of names and render it as a list
