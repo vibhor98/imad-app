@@ -153,6 +153,7 @@ function loadArticles() {
                 articles.innerHTML = content;
             }  else {
                 articles.innerHTML('Opps! Can not load all the articles.')
+            }
         }
     }
     request.get('GET', '/get-articles', true);
