@@ -133,7 +133,7 @@ function LoggedIn() {
             }
         }
     };
-    request.open('GET', '/create-user', true);
+    request.open('GET', '/check-login', true);
     request.send(null);
 } 
     
