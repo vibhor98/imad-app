@@ -60,6 +60,7 @@ submit.onclick = function() {
           if(request.status === 200) {
               console.log('user logged in!');
               alert('Logged in successfully!!!');
+              loadArticles();
           } else if(request.status === 403) {
               alert('Invalid username/password');
           }  else if(request.status === 5000) {
@@ -77,7 +78,7 @@ submit.onclick = function() {
   request.setRequestHeader('Content-Type', 'application/json');
   request.send(JSON.stringify({username: username, password: password}));
   submit.value = 'Logging...'
-  loadArticles();
+  //loadArticles();
   //capture a list of names and render it as a list
 };
 
