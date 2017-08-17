@@ -78,6 +78,8 @@ submit.onclick = function() {
   request.send(JSON.stringify({username: username, password: password}));
   submit.value = 'Logging...'
   //capture a list of names and render it as a list
+  
+  LoggedIn();
 };
 
 //Submit username/password to register
