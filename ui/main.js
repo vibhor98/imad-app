@@ -60,7 +60,6 @@ submit.onclick = function() {
           if(request.status === 200) {
               console.log('user logged in!');
               alert('Logged in successfully!!!');
-              submit.value = 'Logged in';
           } else if(request.status === 403) {
               alert('Invalid username/password');
           }  else if(request.status === 5000) {
