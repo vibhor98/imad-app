@@ -135,7 +135,7 @@ app.get('/check-login', function(req, res) {
 
 app.get('/logout', function(req, res) {
     delete req.session.auth;
-    res.send('<h3>Logged out!</h3><br/><br/><a href="/">Back to Home</a>');
+    res.send('<h3>Logged out!</h3><br/><a href="/">Back to Home</a>');
 });
 
 var pool = new Pool(config);
