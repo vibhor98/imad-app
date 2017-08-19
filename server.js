@@ -194,6 +194,16 @@ app.get('/get-articles', function(req, res) {
     });
 });
 
+app.get('/get-comments/:articleName', function(req, res) {
+   pool.query('SELECT comment.*, "user".username FROM article, comment, "user" WHERE article.title=$1 AND article.id=comment.article_id AND comment.user_id="user".id ORDER BY comment.timestamp DESC', [req.params.articleName] ,function(err, result) {
+       if(err) {
+           res.status(500).send(err.toString());
+       }  else {
+           res.send( JSON.stringify(result.rows));
+       }
+   }); 
+});
+
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
