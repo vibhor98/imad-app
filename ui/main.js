@@ -46,74 +46,87 @@ button.onclick = function() {
   request.send(null);
 };*/
 
-//Submit username/password to login
-var submit = document.getElementById('submit-btn');
-submit.onclick = function() {
-    
-    //create a request obj
-  var request = new XMLHttpRequest();
-  
-  //capture the response and store it in var
-  request.onreadystatechange = function() {
-      if(request.readyState === XMLHttpRequest.DONE) {
-          //take some action
-          if(request.status === 200) {
-              console.log('user logged in!');
-              alert('Logged in successfully!!!');
-          } else if(request.status === 403) {
-              alert('Invalid username/password');
-          }  else if(request.status === 5000) {
-              alert('Something went wrong on the server');
-          }
-          LoggedIn();
-          loadArticles();
-      }
-  };
-  //make a request to the server and send the name
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
-  console.log(username);
-  console.log(password);
-  request.open('POST', 'http://agarwalvibhor84.imad.hasura-app.io/login', true);
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.send(JSON.stringify({username: username, password: password}));
-  submit.value = 'Logging...'
-  //loadArticles();
-  //capture a list of names and render it as a list
-};
 
-//Submit username/password to register
-var register = document.getElementById('register');
-register.onclick = function() {
+function loadloginForm() {
+    var loginHTML = `<h3>Login to unlock awesome features</h3>
+                <div>
+                    <input type='text' id='username' placeholder='username' />
+                    <input type='password' id='password' />
+                    <br/>
+                    <input type='submit' value='Login' id='submit-btn' />
+                    <input type='submit' value='Register' id='register' />
+                </div>`;
+    document.getElementById('login-area').innerHTML = loginHTML;
     
-    //create a request obj
-  var request = new XMLHttpRequest();
-  
-  //capture the response and store it in var
-  request.onreadystatechange = function() {
-      if(request.readyState === XMLHttpRequest.DONE) {
-          //take some action
-          if(request.status === 200) {
-              console.log('user registered successfully!');
-              alert('Registered successfully!!!');
-              register.value = 'Registered';
-          } else {
-              alert('Could not register! Username already exists.');
-              register.value = 'Register';
-          }  
-      }
-  };
-  //make a request to the server and send the name
-  var username = document.getElementById('username').value;
-  var password = document.getElementById('password').value;
-  console.log(username);
-  console.log(password);
-  request.open('POST', '/create-user', true);
-  request.setRequestHeader('Content-Type', 'application/json');
-  request.send(JSON.stringify({username: username, password: password}));
-  register.value = 'Registering...';
-  //capture a list of names and render it as a list
-};
+    //Submit username/password to login
+    var submit = document.getElementById('submit-btn');
+    submit.onclick = function() {
+        
+        //create a request obj
+      var request = new XMLHttpRequest();
+      
+      //capture the response and store it in var
+      request.onreadystatechange = function() {
+          if(request.readyState === XMLHttpRequest.DONE) {
+              //take some action
+              if(request.status === 200) {
+                  console.log('user logged in!');
+                  alert('Logged in successfully!!!');
+              } else if(request.status === 403) {
+                  alert('Invalid username/password');
+              }  else if(request.status === 5000) {
+                  alert('Something went wrong on the server');
+              }
+              LoggedIn();
+              
+          }
+      };
+      //make a request to the server and send the name
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      console.log(username);
+      console.log(password);
+      request.open('POST', 'http://agarwalvibhor84.imad.hasura-app.io/login', true);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify({username: username, password: password}));
+      submit.value = 'Logging...'
+      //loadArticles();
+      //capture a list of names and render it as a list
+    };
+    
+    //Submit username/password to register
+    var register = document.getElementById('register');
+    register.onclick = function() {
+        
+        //create a request obj
+      var request = new XMLHttpRequest();
+      
+      //capture the response and store it in var
+      request.onreadystatechange = function() {
+          if(request.readyState === XMLHttpRequest.DONE) {
+              //take some action
+              if(request.status === 200) {
+                  console.log('user registered successfully!');
+                  alert('Registered successfully!!!');
+                  register.value = 'Registered';
+              } else {
+                  alert('Could not register! Username already exists.');
+                  register.value = 'Register';
+              }  
+          }
+      };
+      //make a request to the server and send the name
+      var username = document.getElementById('username').value;
+      var password = document.getElementById('password').value;
+      console.log(username);
+      console.log(password);
+      request.open('POST', '/create-user', true);
+      request.setRequestHeader('Content-Type', 'application/json');
+      request.send(JSON.stringify({username: username, password: password}));
+      register.value = 'Registering...';
+      //capture a list of names and render it as a list
+    };
+}
 
 function userLoggedIn(username) {
     var loginArea = document.getElementById('login-area');
@@ -161,6 +174,7 @@ function loadArticles() {
     request.send(null);
 }
 
+loadloginForm();
 loadArticles();
 
 
