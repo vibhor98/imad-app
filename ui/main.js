@@ -154,7 +154,7 @@ function loadArticles() {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         if(request.readyState === XMLHttpRequest.DONE) {
-            var articles = document.getElementById('articles');
+            var article = document.getElementById('articles');
             if(request.status === 200) {
                 var articleData = JSON.parse(this.responseText);
                 var content = '<ul>';
@@ -164,9 +164,9 @@ function loadArticles() {
                     (${articleData[i].date.split('T')[0]})</li> `;
                 }
                 content += '</ul>';
-                articles.innerHTML = content;
+                article.innerHTML = content;
             }  else {
-                articles.innerHTML('Opps! Can not load all the articles.');
+                article.innerHTML('Opps! Can not load all the articles.');
             }
         }
     };
