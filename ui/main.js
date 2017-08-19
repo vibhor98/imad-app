@@ -170,7 +170,7 @@ function loadArticles() {
             }
         }
     };
-    request.get('GET', '/get-articles', true);
+    request.open('GET', '/get-articles', true);
     request.send(null);
 }
 
