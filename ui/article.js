@@ -2,7 +2,7 @@ var currentArticleTitle = window.location.pathname.split('/')[2];
 
 function loadCommentForm() {
     var commentFormHtml = `
-    <h4>Submit a comment </h4>
+    <h4>Submit a comment- </h4>
     <textarea cols="100" rows="4" id="text_comment" placeholder="Enter your comments here..."></textarea>
     <br/>
     <input type="submit" id="submit" value="Submit">
@@ -72,7 +72,7 @@ function loadcomments() {
             }
         }
     };
-    request.open('GET', '/get-comments' + currentArticleTitle, true);
+    request.open('GET', '/get-comments/' + currentArticleTitle, true);
     request.send(null);
 }
 
