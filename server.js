@@ -50,7 +50,8 @@ function createTemplate(data) {
                     ${content}
                 </div>
             </div>
-            <footer>Comments:</footer>
+            <div>Comments:</div>
+            <script type="text/javascript" src="/ui/article.js"></script>
         </body>
     </html>
     `;
