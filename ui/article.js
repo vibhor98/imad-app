@@ -7,6 +7,8 @@ function loadCommentForm() {
     <br/>
     <input type="submit" id="submit" value="Submit">
     <br/>`;
+    document.getElementById('comment_form').innerHTML = commentFormHtml;
+    
     
     var submit = document.getElementById('submit');
     submit.onclick = function() {
