@@ -1,80 +1,99 @@
 var currentArticleTitle = window.location.pathname.split('/')[2];
 
-function loadCommentForm() {
+function loadCommentForm () {
     var commentFormHtml = `
-    <h4>Submit a comment- </h4>
-    <textarea cols="100" rows="4" id="text_comment" placeholder="Enter your comments here..."></textarea>
-    <br/>
-    <input type="submit" id="submit" value="Submit">
-    <br/>`;
+        <h5>Submit a comment</h5>
+        <textarea id="comment_text" rows="5" cols="100" placeholder="Enter your comment here..."></textarea>
+        <br/>
+        <input type="submit" id="submit" value="Submit" />
+        <br/>
+        `;
     document.getElementById('comment_form').innerHTML = commentFormHtml;
     
-    
+    // Submit username/password to login
     var submit = document.getElementById('submit');
-    submit.onclick = function() {
+    submit.onclick = function () {
+        // Create a request object
         var request = new XMLHttpRequest();
-        request.onreadystatechange = function() {
-            if(request.readystate === XMLHttpRequest.DONE) {
-                if(request.status === 200) {
-                    document.getElementById('text_comment').value = '';
-                    loadcomments();
-                }  else {
-                    alert("Error! Couldn't submit the form");
+        
+        // Capture the response and store it in a variable
+        request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+                // Take some action
+                if (request.status === 200) {
+                    // clear the form & reload all the comments
+                    document.getElementById('comment_text').value = '';
+                    loadComments();    
+                } else {
+                    alert('Error! Could not submit comment');
                 }
-            }
+                submit.value = 'Submit';
+          }
         };
-        var comment = document.getElementById('text_comment').value;
-        request.open('POST', '/submit-comment/' + currentArticleTitle , true);
+        
+        // Make the request
+        var comment = document.getElementById('comment_text').value;
+        request.open('POST', '/submit-comment/' + currentArticleTitle, true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({comment: comment}));
+        request.send(JSON.stringify({comment: comment}));  
         submit.value = 'Submitting...';
+        
     };
 }
 
-function loadlogin() {
+function loadLogin () {
+    // Check if the user is already logged in
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readystate === XMLHttpRequest.DONE) {
-            if(request.status === 200)
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
+            if (request.status === 200) {
                 loadCommentForm(this.responseText);
+            }
         }
     };
+    
     request.open('GET', '/check-login', true);
     request.send(null);
 }
 
-function escapeHTML() {
+function escapeHTML (text)
+{
     var $text = document.createTextNode(text);
     var $div = document.createElement('div');
     $div.appendChild($text);
     return $div.innerHTML;
 }
-function loadcomments() {
+
+function loadComments () {
+        // Check if the user is already logged in
     var request = new XMLHttpRequest();
-    request.onreadystatechange = function() {
-        if(request.readystate === XMLHttpRequest.DONE) {
+    request.onreadystatechange = function () {
+        if (request.readyState === XMLHttpRequest.DONE) {
             var comments = document.getElementById('comments');
-            var content = '';
-            var commentsData = JSON.parse(this.responseText);
-            if(request.status === 200) {
-                for(var i=0; i<commentsData.length; i++) {
+            if (request.status === 200) {
+                var content = '';
+                var commentsData = JSON.parse(this.responseText);
+                for (var i=0; i< commentsData.length; i++) {
                     var time = new Date(commentsData[i].timestamp);
-                    content += ` <div class="comment">
-                    <p>${escapeHTML(commentsData[i].comment)}</p>
-                    <div class="commentor">
-                        ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()}
-                    </div> 
-                </div>`;
+                    content += `<div class="comment">
+                        <p>${escapeHTML(commentsData[i].comment)}</p>
+                        <div class="commenter">
+                            ${commentsData[i].username} - ${time.toLocaleTimeString()} on ${time.toLocaleDateString()} 
+                        </div>
+                    </div>`;
                 }
                 comments.innerHTML = content;
-            }  else {
-                comments.innerHTML("Opps! Could not load comments");
+            } else {
+                comments.innerHTML('Oops! Could not load comments!');
             }
         }
     };
+    
     request.open('GET', '/get-comments/' + currentArticleTitle, true);
     request.send(null);
 }
 
-loadlogin();
-loadcomments();
+
+// The first thing to do is to check if the user is logged in!
+loadLogin();
+loadComments();
