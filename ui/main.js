@@ -142,7 +142,6 @@ function LoggedIn() {
             if(request.status === 200) {
                 userLoggedIn(this.responseText);
             } else {
-                alert('Error in Logging Up!!');
                 loadloginForm();
             }
         }
