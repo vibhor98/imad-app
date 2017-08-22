@@ -47,7 +47,7 @@ button.onclick = function() {
 };*/
 
 
-/*function loadloginForm() {
+function loadloginForm() {
     var loginHTML = `<h3>Login to unlock awesome features</h3>
                 <div>
                     <input type='text' id='username' placeholder='username' />
@@ -176,9 +176,9 @@ function loadArticles() {
 
 
 LoggedIn();
-loadArticles();*/
+loadArticles();
 
-function loadLoginForm () {
+/*function loadLoginForm () {
     var loginHtml = `
         <h3>Login/Register to unlock awesome features</h3>
         <input type="text" id="username" placeholder="username" />
@@ -315,7 +315,7 @@ function loadArticles () {
 loadLogin();
 
 // Now this is something that we could have directly done on the server-side using templating too!
-loadArticles();
+loadArticles();*/
 
 
 
