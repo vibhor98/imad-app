@@ -56,7 +56,7 @@ function loadloginForm() {
                     <input type='submit' value='Login' id='submit-btn' />
                     <input type='submit' value='Register' id='register' />
                 </div>`;
-    document.getElementById('login-area').innerHTML = loginHTML;
+    document.getElementById('login_area').innerHTML = loginHTML;
     
     //Submit username/password to login
     var submit = document.getElementById('submit-btn');
