@@ -143,6 +143,7 @@ function LoggedIn() {
                 userLoggedIn(this.responseText);
             } else {
                 alert('Error in Logging Up!!');
+                loadloginForm();
             }
         }
     };
@@ -175,7 +176,7 @@ function loadArticles() {
 }
 
 
-loadloginForm();
+LoggedIn();
 loadArticles();
 
 
