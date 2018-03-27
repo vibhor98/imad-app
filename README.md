@@ -1,3 +1,3 @@
 # imad-app
 
-IMAD course application.
+An IMAD blogging application.
